@@ -22,28 +22,14 @@ var userComments = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-var randomComment = function () {
-  for (var i = 0; i <= userComments.length; i++) {
-    var userComment = Math.random() * userComments.length;
-  }
-  return userComment;
-};
-
-var randomName = function () {
-  for (var i = 0; i <= userNames.length; i++) {
-    var userName = Math.random() * userNames.length;
-  }
-  return userName;
-};
-
 var userComment = function () {
   var commentObj = [];
   for (var i = 0; i <= 4; i++) {
     commentObj.push(
         {
           avatar: 'img/avatar - ' + Math.random() * 6 + '.svg',
-          message: randomComment(),
-          name: randomName()
+          message: userComments[parseInt(Math.random() * userComments.length, 10)],
+          name: userNames[parseInt(Math.random() * userNames.length, 10)],
         });
   }
   return commentObj;
