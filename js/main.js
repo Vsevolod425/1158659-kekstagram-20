@@ -39,42 +39,27 @@ var randomName = function () {
 var userComment = function () {
   var commentObj = [];
   for (var i = 0; i <= 4; i++) {
-    commentObj.push (
-    var firstUser = {
-      avatar: 'img/avatar - ' + Math.random() * 6 + '.svg',
-      message: randomComment(),
-      name: randomName()
-    },
-    var secondUser = {
-      avatar: 'img/avatar - ' + Math.random() * 6 + '.svg',
-      message: randomComment(),
-      name: randomName()
-    },
-    var thirdUser = {
-      avatar: 'img/avatar - ' + Math.random() * 6 + '.svg',
-      message: randomComment(),
-      name: randomName()
-    },
-    var fourthUser = {
-      avatar: 'img/avatar - ' + Math.random() * 6 + '.svg',
-      message: randomComment(),
-      name: randomName()
-    },)
+    commentObj.push(
+        {
+          avatar: 'img/avatar - ' + Math.random() * 6 + '.svg',
+          message: randomComment(),
+          name: randomName()
+        });
   }
   return commentObj;
 };
 
 var cardsGen = function () {
-  var cardsItem = [];
+  var cardItem = [];
   for (var i = 0; i <= 25; i++) {
-    cardItem.push ({
-      'avatar': 'photos/' + parseInt(Math.random() * 25) + '.jpg',
-      'description': descriptionList[parseInt(Math.random() * descriptionList.length)],
+    cardItem.push({
+      'avatar': 'photos/' + parseInt(Math.random() * 25, 10) + '.jpg',
+      'description': descriptionList[parseInt(Math.random() * descriptionList.length, 10)],
       'likes': likeCounter(15, 200),
       'comments': userComment()
-    })
+    });
   }
-  return cardsItem;
+  return cardItem;
 };
 
 var likeCounter = function (min, max) {
