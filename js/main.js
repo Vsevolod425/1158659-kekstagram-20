@@ -59,7 +59,7 @@ var pictureTemplate = document.querySelector('#picture').content.querySelector('
 var fragment = new DocumentFragment();
 var cards = cardsGen();
 
-for (var i = 0; i <= cards.length; i++) {
+for (var i = 0; i < cards.length; i++) {
   var copyPicture = pictureTemplate.cloneNode(true);
   copyPicture.querySelector('.picture__img').src = cards[i].avatar;
   copyPicture.querySelector('.picture__likes').textContent = cards[i].likes;
