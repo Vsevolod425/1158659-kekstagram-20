@@ -39,14 +39,14 @@ var userComment = function () {
 
 var likeCounter = function (min, max) {
   var count = Math.random() * (max - min);
-  return count;
+  return parseInt(count + 1, 10);
 };
 
 var cardsGen = function () {
   var cardItem = [];
   for (var i = 0; i <= 25; i++) {
     cardItem.push({
-      'avatar': 'img/' + parseInt(Math.random() * 25, 10) + '.jpg',
+      'avatar': 'photos/' + parseInt(Math.random() * 25 + 1, 10) + '.jpg',
       'description': descriptionList[parseInt(Math.random() * descriptionList.length, 10)],
       'likes': likeCounter(15, 200),
       'comments': userComment()
@@ -57,12 +57,13 @@ var cardsGen = function () {
 
 var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 var fragment = new DocumentFragment();
+var cards = cardsGen();
 
-for (var i = 0; i <= cardsGen.length; i++) {
+for (var i = 0; i <= cards.length; i++) {
   var copyPicture = pictureTemplate.cloneNode(true);
-  copyPicture.querySelector('.picture__img').srs = cardsGen[i].avatar;
-  copyPicture.querySelector('.picture__likes').textContent = cardsGen[i].likes;
-  copyPicture.querySelector('.picture__comments').textContent = cardsGen[i].comments.length;
+  copyPicture.querySelector('.picture__img').src = cards[i].avatar;
+  copyPicture.querySelector('.picture__likes').textContent = cards[i].likes;
+  copyPicture.querySelector('.picture__comments').textContent = cards[i].comments.length;
   fragment.appendChild(copyPicture);
 }
 
