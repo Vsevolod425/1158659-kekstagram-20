@@ -1,3 +1,5 @@
+'use strict';
+
 var descriptionList = [
   'Неродные просторы',
   'Местная растительность',
@@ -35,11 +37,16 @@ var userComment = function () {
   return commentObj;
 };
 
+var likeCounter = function (min, max) {
+  var count = Math.random() * (max - min);
+  return count;
+};
+
 var cardsGen = function () {
   var cardItem = [];
   for (var i = 0; i <= 25; i++) {
     cardItem.push({
-      'avatar': 'photos/' + parseInt(Math.random() * 25, 10) + '.jpg',
+      'avatar': 'img/' + parseInt(Math.random() * 25, 10) + '.jpg',
       'description': descriptionList[parseInt(Math.random() * descriptionList.length, 10)],
       'likes': likeCounter(15, 200),
       'comments': userComment()
@@ -48,7 +55,16 @@ var cardsGen = function () {
   return cardItem;
 };
 
-var likeCounter = function (min, max) {
-  var count = Math.random() * (max - min);
-  return count;
-};
+var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+var fragment = new DocumentFragment();
+
+for (var i = 0; i <= cardsGen.length; i++) {
+  var copyPicture = pictureTemplate.cloneNode(true);
+  copyPicture.querySelector('.picture__img').srs = cardsGen[i].avatar;
+  copyPicture.querySelector('.picture__likes').textContent = cardsGen[i].likes;
+  copyPicture.querySelector('.picture__comments').textContent = cardsGen[i].comments.length;
+  fragment.appendChild(copyPicture);
+}
+
+var pictureList = document.querySelector('.pictures');
+pictureList.appendChild(fragment);
