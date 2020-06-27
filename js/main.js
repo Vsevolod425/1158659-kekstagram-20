@@ -69,3 +69,40 @@ for (var i = 0; i < cards.length; i++) {
 
 var pictureList = document.querySelector('.pictures');
 pictureList.appendChild(fragment);
+
+//Окно редактирования изображения
+
+var uploadFile = document.querySelector('#upload-file');
+var openForm = document.querySelector('.img-upload__overlay');
+var closeForm = openForm.querySelector('.img-upload__cancel');
+
+uploadFile.addEventListener('change', function () {
+  openForm.classList.remove('hidden');
+});
+
+var onPopupEscPress = function (evt) {
+  if (evt.key === 'Escape') {
+    closePopup();
+  }
+};
+
+var closePopup = function () {
+  openForm.classList.add('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+  uploadFile.value = '';
+};
+
+closeForm.addEventListener('click', function () {
+  closePopup();
+});
+
+//Наложение эффекта на фото
+
+var photoPreview = document.querySelector('.img-upload__preview');
+var photoEffectList = document.querySelector('.img-upload__effects');
+
+var photoEffectChange = function (evt) {
+  photoPreview.classList.add(“effect-preview__” + evt.target.value);
+};
+
+photoEffectList.addEventListener('change', photoEffectChange);
