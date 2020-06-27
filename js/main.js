@@ -102,7 +102,7 @@ var photoPreview = document.querySelector('.img-upload__preview');
 var photoEffectList = document.querySelector('.img-upload__effects');
 
 var photoEffectChange = function (evt) {
-  photoPreview.classList.add(“effect-preview__” + evt.target.value);
+  photoPreview.classList.add('effects__preview--' + evt.target.value);
 };
 
 photoEffectList.addEventListener('change', photoEffectChange);
