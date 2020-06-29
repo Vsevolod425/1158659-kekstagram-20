@@ -99,10 +99,18 @@ closeForm.addEventListener('click', function () {
 //Наложение эффекта на фото
 
 var photoPreview = document.querySelector('.img-upload__preview');
+var photoPreviewImg = photoPreview.querySelector('img');
 var photoEffectList = document.querySelector('.img-upload__effects');
+var photoEffectItem = photoEffectList.children;
+var effectPin = document.querySelector('.effect-level__pin');
 
-var photoEffectChange = function (evt) {
-  photoPreview.classList.add('effects__preview--' + evt.target.value);
+
+var addPhotoEffect = function (evt) {
+  photoPreviewImg.classList.add('effects__preview--' + evt.target.value);
 };
 
-photoEffectList.addEventListener('change', photoEffectChange);
+photoEffectList.addEventListener('change', addPhotoEffect);
+
+effectPin.addEventListener('mouseup', function(evt) {
+
+});

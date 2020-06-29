@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Vsevolod Shabashov](https://up.htmlacademy.ru/javascript/20/user/1158659).
-* Наставник: [Игорь Тараканов](https://htmlacademy.ru/profile/id487569).
+* Наставник: [Олег Глущенко](https://htmlacademy.ru/profile/id305355).
 
 ---
 
