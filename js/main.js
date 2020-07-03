@@ -2,6 +2,7 @@
 
 var DECIMAL_SYSTEM = 10;
 var GENERATED_CARDS_AMOUNT = 25;
+var GENERATED_COMENTS_AMOUNT = 4;
 
 var descriptionList = [
   'Неродные просторы',
@@ -33,16 +34,16 @@ var getRandomElement = function (array) {
 };
 
 var getUserComment = function () {
-  var commentObj = [];
-  for (var i = 0; i <= 4; i++) {
-    commentObj.push(
+  var cards = [];
+  for (var i = 0; i <= GENERATED_COMENTS_AMOUNT; i++) {
+    cards.push(
         {
           avatar: 'img/avatar - ' + Math.random() * userComments.length + '.svg',
           message: getRandomElement(userComments),
           name: getRandomElement(userNames)
         });
   }
-  return commentObj;
+  return cards;
 };
 
 var getLikeCounter = function (min, max) {
@@ -50,7 +51,7 @@ var getLikeCounter = function (min, max) {
   return parseInt(count + 1, DECIMAL_SYSTEM);
 };
 
-var getCardsGen = function () {
+var generateCards = function () {
   var cardItem = [];
   for (var i = 0; i <= GENERATED_CARDS_AMOUNT; i++) {
     cardItem.push({
@@ -65,7 +66,7 @@ var getCardsGen = function () {
 
 var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 var fragment = new DocumentFragment();
-var cards = getCardsGen();
+var cards = generateCards();
 
 for (var i = 0; i < cards.length; i++) {
   var copyPicture = pictureTemplate.cloneNode(true);
@@ -112,13 +113,21 @@ var photoEffectList = document.querySelector('.img-upload__effects');
 var photoEffectItem = photoEffectList.children;
 var effectPin = document.querySelector('.effect-level__pin');
 
+var oldPhotoEffect = '';
 
 var addPhotoEffect = function (evt) {
-  photoPreviewImg.classList.add('effects__preview--' + evt.target.value);
+  var currentPhotoEffect = 'effects__preview--' + evt.target.value;
+  photoPreview.classList.add(currentPhotoEffect);
+  if (oldPhotoEffect !== '') {
+    photoPreview.classList.remove(oldPhotoEffect);
+  }
+  oldPhotoEffect = currentPhotoEffect
 };
 
 photoEffectList.addEventListener('change', addPhotoEffect);
 
-effectPin.addEventListener('mouseup', function(evt) {
 
-});
+
+// effectPin.addEventListener('mouseup', function(evt) {
+
+// });
