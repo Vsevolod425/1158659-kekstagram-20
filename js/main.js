@@ -3,6 +3,7 @@
 var DECIMAL_SYSTEM = 10;
 var GENERATED_CARDS_AMOUNT = 25;
 var GENERATED_COMENTS_AMOUNT = 4;
+var MAX_RATIO = 1;
 
 var descriptionList = [
   'Неродные просторы',
@@ -112,6 +113,9 @@ var photoPreviewImg = photoPreview.querySelector('img');
 var photoEffectList = document.querySelector('.img-upload__effects');
 var photoEffectItem = photoEffectList.children;
 var effectPin = document.querySelector('.effect-level__pin');
+var effectFilter = document.querySelector('.img-upload__preview');
+var filterWidth = document.querySelector('.effect-level__line');
+var filterCheckWidth = document.querySelector('.effect-level__depth');
 
 var oldPhotoEffect = '';
 
@@ -126,8 +130,12 @@ var addPhotoEffect = function (evt) {
 
 photoEffectList.addEventListener('change', addPhotoEffect);
 
+effectPin.addEventListener('mouseup', function(evt) {
+  console.log(photoEffectProportion());
+  effectFilter.style.filter = 'grayscale(' + photoEffectProportion() + ')';
+});
 
-
-// effectPin.addEventListener('mouseup', function(evt) {
-
-// });
+var photoEffectProportion = function () {
+  var photoEffectAttitude = MAX_RATIO / (filterWidth.clientWidth / filterCheckWidth.clientWidth);
+  return photoEffectAttitude;
+};
