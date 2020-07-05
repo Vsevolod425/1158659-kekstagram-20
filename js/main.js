@@ -116,6 +116,10 @@ var effectPin = document.querySelector('.effect-level__pin');
 var effectFilter = document.querySelector('.img-upload__preview');
 var filterWidth = document.querySelector('.effect-level__line');
 var filterCheckWidth = document.querySelector('.effect-level__depth');
+var filterType = '';
+var filterUnits = '';
+var filterMinValue = 0;
+var filterMaxValue = 0;
 
 var oldPhotoEffect = '';
 
@@ -125,17 +129,59 @@ var addPhotoEffect = function (evt) {
   if (oldPhotoEffect !== '') {
     photoPreview.classList.remove(oldPhotoEffect);
   }
-  oldPhotoEffect = currentPhotoEffect
+  oldPhotoEffect = currentPhotoEffect;
+
+  if (evt.target.value === 'none') {
+    filterType = '';
+    filterUnits = '';
+    filterMinValue = 0;
+    filterMaxValue = 0;
+  } else if (evt.target.value === 'chrome') {
+    filterType = 'grayscale';
+    filterUnits = '';
+    filterMinValue = 0;
+    filterMaxValue = 1;
+  } else if (evt.target.value === 'sepia') {
+    filterType = 'sepia';
+    filterUnits = '';
+    filterMinValue = 0;
+    filterMaxValue = 1;
+  } else if (evt.target.value === 'marvin') {
+    filterType = 'invert';
+    filterUnits = '%';
+    filterMinValue = 0;
+    filterMaxValue = 100;
+  } else if (evt.target.value === 'phobos') {
+    filterType = 'blur';
+    filterUnits = 'px';
+    filterMinValue = 0;
+    filterMaxValue = 3;
+  } else if (evt.target.value === 'heat') {
+    filterType = 'brightness';
+    filterUnits = '';
+    filterMinValue = 1;
+    filterMaxValue = 3;
+  };
+
+  if (evt.target.value === 'none') {
+    effectFilter.style.filter = '';
+  } else {
+    effectFilter.style.filter = filterType + '(' + filterMaxValue + filterUnits + ')';
+  }
 };
 
 photoEffectList.addEventListener('change', addPhotoEffect);
 
 effectPin.addEventListener('mouseup', function(evt) {
   console.log(photoEffectProportion());
-  effectFilter.style.filter = 'grayscale(' + photoEffectProportion() + ')';
+  if (evt.target.value === 'none') {
+    effectFilter.style.filter = '';
+  } else {
+    effectFilter.style.filter = filterType + '(' + photoEffectProportion() + filterUnits + ')';
+  }
 });
 
 var photoEffectProportion = function () {
-  var photoEffectAttitude = MAX_RATIO / (filterWidth.clientWidth / filterCheckWidth.clientWidth);
+  var photoEffectAttitude = (filterMaxValue - filterMinValue) / (filterWidth.clientWidth / filterCheckWidth.clientWidth) + filterMinValue;
   return photoEffectAttitude;
 };
