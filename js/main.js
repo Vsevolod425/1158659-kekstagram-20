@@ -3,7 +3,6 @@
 var DECIMAL_SYSTEM = 10;
 var GENERATED_CARDS_AMOUNT = 25;
 var GENERATED_COMENTS_AMOUNT = 4;
-var MAX_RATIO = 1;
 
 var descriptionList = [
   'Неродные просторы',
@@ -120,6 +119,7 @@ var filterType = '';
 var filterUnits = '';
 var filterMinValue = 0;
 var filterMaxValue = 0;
+var presentFilterValue = '';
 
 var oldPhotoEffect = '';
 
@@ -131,57 +131,75 @@ var addPhotoEffect = function (evt) {
   }
   oldPhotoEffect = currentPhotoEffect;
 
-  if (evt.target.value === 'none') {
-    filterType = '';
-    filterUnits = '';
-    filterMinValue = 0;
-    filterMaxValue = 0;
-  } else if (evt.target.value === 'chrome') {
-    filterType = 'grayscale';
-    filterUnits = '';
-    filterMinValue = 0;
-    filterMaxValue = 1;
-  } else if (evt.target.value === 'sepia') {
-    filterType = 'sepia';
-    filterUnits = '';
-    filterMinValue = 0;
-    filterMaxValue = 1;
-  } else if (evt.target.value === 'marvin') {
-    filterType = 'invert';
-    filterUnits = '%';
-    filterMinValue = 0;
-    filterMaxValue = 100;
-  } else if (evt.target.value === 'phobos') {
-    filterType = 'blur';
-    filterUnits = 'px';
-    filterMinValue = 0;
-    filterMaxValue = 3;
-  } else if (evt.target.value === 'heat') {
-    filterType = 'brightness';
-    filterUnits = '';
-    filterMinValue = 1;
-    filterMaxValue = 3;
+  switch (evt.target.value) {
+    case 'none':
+      filterType = '';
+      filterUnits = '';
+      filterMinValue = 0;
+      filterMaxValue = 0;
+      break;
+    case 'chrome':
+      filterType = 'grayscale';
+      filterUnits = '';
+      filterMinValue = 0;
+      filterMaxValue = 1;
+      break;
+    case 'sepia':
+      filterType = 'sepia';
+      filterUnits = '';
+      filterMinValue = 0;
+      filterMaxValue = 1;
+      break;
+    case 'marvin':
+      filterType = 'invert';
+      filterUnits = '%';
+      filterMinValue = 0;
+      filterMaxValue = 100;
+      break;
+    case 'phobos':
+      filterType = 'blur';
+      filterUnits = 'px';
+      filterMinValue = 0;
+      filterMaxValue = 3;
+      break;
+    case 'heat':
+      filterType = 'brightness';
+      filterUnits = '';
+      filterMinValue = 1;
+      filterMaxValue = 3;
+      break;
   };
 
-  if (evt.target.value === 'none') {
-    effectFilter.style.filter = '';
-  } else {
-    effectFilter.style.filter = filterType + '(' + filterMaxValue + filterUnits + ')';
-  }
+  presentFilterValue = (evt.target.value === 'none') ? effectFilter.style.filter = '' :
+  effectFilter.style.filter = filterType + '(' + filterMaxValue + filterUnits + ')';
 };
 
 photoEffectList.addEventListener('change', addPhotoEffect);
 
 effectPin.addEventListener('mouseup', function(evt) {
-  console.log(photoEffectProportion());
-  if (evt.target.value === 'none') {
-    effectFilter.style.filter = '';
-  } else {
-    effectFilter.style.filter = filterType + '(' + photoEffectProportion() + filterUnits + ')';
-  }
+ presentFilterValue = (evt.target.value === 'none') ? effectFilter.style.filter = '' :
+ effectFilter.style.filter = filterType + '(' + photoEffectProportion() + filterUnits + ')';
 });
 
 var photoEffectProportion = function () {
   var photoEffectAttitude = (filterMaxValue - filterMinValue) / (filterWidth.clientWidth / filterCheckWidth.clientWidth) + filterMinValue;
   return photoEffectAttitude;
 };
+
+//Валидация хештегов
+
+var hashTagsInput = document.querySelector('.text__hashtags');
+var hashTagsInputValue = hashTagsInput.value;
+var hashTags = hashTagsInputValue.split(' ');
+for (var i = 0; i < hashTags.length; i++) {
+  var currentHashTag = hashTags[i];
+  var isHashtagValid = currentHashtag[0] === '#';
+  var isHashtagShort = currentHashTag.length > 1;
+  var hashTagMaxLength = currentHashTag.length < 20;
+  var hasHashtagMultipleSharps = currentHashTag.split('#').length > 2;
+  console.log(i);
+  console.log(isHashtagValid);
+  console.log(isHashtagShort);
+  console.log(hasHashtagMultipleSharps);
+}
+hashTags < 5;
