@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 (function () {
   var hashTagsInput = document.querySelector('.text__hashtags');

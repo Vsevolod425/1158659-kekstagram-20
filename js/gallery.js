@@ -1,6 +1,10 @@
 'use strict';
 
 (function () {
+  var DECIMAL_SYSTEM = 10;
+  var GENERATED_COMENTS_AMOUNT = 4;
+  var GENERATED_CARDS_AMOUNT = 25;
+
   var descriptionList = [
     'Неродные просторы',
     'Местная растительность',
@@ -24,6 +28,11 @@
     'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
     'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
   ];
+
+  var getRandomElement = function (array) {
+    var randomElement = array[parseInt(Math.random() * array.length, DECIMAL_SYSTEM)];
+    return randomElement;
+  };
 
   var getUserComment = function () {
     var cards = [];
@@ -55,19 +64,3 @@
     }
     return cardItem;
   };
-
-  var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-  var fragment = new DocumentFragment();
-  var cards = generateCards();
-
-  for (var i = 0; i < cards.length; i++) {
-    var copyPicture = pictureTemplate.cloneNode(true);
-    copyPicture.querySelector('.picture__img').src = cards[i].avatar;
-    copyPicture.querySelector('.picture__likes').textContent = cards[i].likes;
-    copyPicture.querySelector('.picture__comments').textContent = cards[i].comments.length;
-    fragment.appendChild(copyPicture);
-  }
-
-  var pictureList = document.querySelector('.pictures');
-  pictureList.appendChild(fragment);
-})();
