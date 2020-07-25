@@ -64,3 +64,7 @@
     }
     return cardItem;
   };
+  window.gallery = {
+    generateCards: generateCards
+  };
+})();

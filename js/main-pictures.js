@@ -3,7 +3,7 @@
 (function () {
   var pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   var fragment = new DocumentFragment();
-  var cards = generateCards();
+  var cards = window.gallery.generateCards();
 
   for (var i = 0; i < cards.length; i++) {
     var copyPicture = pictureTemplate.cloneNode(true);

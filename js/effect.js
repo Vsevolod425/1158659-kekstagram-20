@@ -2,9 +2,7 @@
 
 (function () {
   var photoPreview = document.querySelector('.img-upload__preview');
-  var photoPreviewImg = photoPreview.querySelector('img');
   var photoEffectList = document.querySelector('.img-upload__effects');
-  var photoEffectItem = photoEffectList.children;
   var effectPin = document.querySelector('.effect-level__pin');
   var effectFilter = document.querySelector('.img-upload__preview');
   var filterWidth = document.querySelector('.effect-level__line');
@@ -14,7 +12,6 @@
   var filterMinValue = 0;
   var filterMaxValue = 0;
   var presentFilterValue = '';
-
   var oldPhotoEffect = '';
 
   var addPhotoEffect = function (evt) {
@@ -62,17 +59,17 @@
         filterMinValue = 1;
         filterMaxValue = 3;
         break;
-    };
+    }
 
     presentFilterValue = (evt.target.value === 'none') ? effectFilter.style.filter = '' :
-    effectFilter.style.filter = filterType + '(' + filterMaxValue + filterUnits + ')';
+      effectFilter.style.filter = filterType + '(' + filterMaxValue + filterUnits + ')';
   };
 
   photoEffectList.addEventListener('change', addPhotoEffect);
 
   effectPin.addEventListener('mouseup', function(evt) {
-   presentFilterValue = (evt.target.value === 'none') ? effectFilter.style.filter = '' :
-   effectFilter.style.filter = filterType + '(' + photoEffectProportion() + filterUnits + ')';
+    presentFilterValue = (evt.target.value === 'none') ? effectFilter.style.filter = '' :
+      effectFilter.style.filter = filterType + '(' + photoEffectProportion() + filterUnits + ')';
   });
 
   var photoEffectProportion = function () {
