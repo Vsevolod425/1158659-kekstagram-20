@@ -54,7 +54,7 @@
 
   var generateCards = function () {
     var cardItem = [];
-    for (var i = 0; i <= GENERATED_CARDS_AMOUNT; i++) {
+    for (var i = 0; i < GENERATED_CARDS_AMOUNT; i++) {
       cardItem.push({
         'avatar': 'photos/' + parseInt(Math.random() * GENERATED_CARDS_AMOUNT + 1, DECIMAL_SYSTEM) + '.jpg',
         'description': getRandomElement(descriptionList),
