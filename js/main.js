@@ -108,9 +108,7 @@ closeForm.addEventListener('click', function () {
 //Наложение эффекта на фото
 
 var photoPreview = document.querySelector('.img-upload__preview');
-var photoPreviewImg = photoPreview.querySelector('img');
 var photoEffectList = document.querySelector('.img-upload__effects');
-var photoEffectItem = photoEffectList.children;
 var effectPin = document.querySelector('.effect-level__pin');
 var effectFilter = document.querySelector('.img-upload__preview');
 var filterWidth = document.querySelector('.effect-level__line');
@@ -168,17 +166,14 @@ var addPhotoEffect = function (evt) {
       filterMinValue = 1;
       filterMaxValue = 3;
       break;
-  };
-
-  presentFilterValue = (evt.target.value === 'none') ? effectFilter.style.filter = '' :
-  effectFilter.style.filter = filterType + '(' + filterMaxValue + filterUnits + ')';
+  }
 };
 
 photoEffectList.addEventListener('change', addPhotoEffect);
 
-effectPin.addEventListener('mouseup', function(evt) {
- presentFilterValue = (evt.target.value === 'none') ? effectFilter.style.filter = '' :
- effectFilter.style.filter = filterType + '(' + photoEffectProportion() + filterUnits + ')';
+effectPin.addEventListener('mouseup', function (evt) {
+  presentFilterValue = (evt.target.value === 'none') ? effectFilter.style.filter = '' :
+    effectFilter.style.filter = filterType + '(' + photoEffectProportion() + filterUnits + ')';
 });
 
 var photoEffectProportion = function () {
@@ -188,19 +183,14 @@ var photoEffectProportion = function () {
 
 //Валидация хештегов
 
-var hashTagsInput = document.querySelector('.text__hashtags');
-var hashTagsInputValue = hashTagsInput.value;
-var hashTags = hashTagsInputValue.split(' ');
-for (var i = 0; i < hashTags.length; i++) {
-  var currentHashTag = hashTags[i];
-  var isHashtagValid = currentHashtag[0] === '#';
-  var isHashtagShort = currentHashTag.length > 1;
-  var hashTagMaxLength = currentHashTag.length < 20;
-  var hasHashtagMultipleSharps = currentHashTag.split('#').length > 2;
-  console.log(i);
-  console.log(isHashtagValid);
-  console.log(isHashtagShort);
-  console.log(hasHashtagMultipleSharps);
-}
-hashTags < 5;
-
+// var hashTagsInput = document.querySelector('.text__hashtags');
+// var hashTagsInputValue = hashTagsInput.value;
+// var hashTags = hashTagsInputValue.split(' ');
+// for (var i = 0; i < hashTags.length; i++) {
+//   var currentHashTag = hashTags[i];
+//   var isHashtagValid = currentHashtag[0] === '#';
+//   var isHashtagShort = currentHashTag.length > 1;
+//   var hashTagMaxLength = currentHashTag.length < 20;
+//   var hasHashtagMultipleSharps = currentHashTag.split('#').length > 2;
+// }
+// hashTags < 5;
